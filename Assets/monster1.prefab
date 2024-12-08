@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 0.1
-  ground: {fileID: 4686829475792852873, guid: 24508ca7452ef43368d6e76eb1b57500, type: 3}
+  arPlane: {fileID: 6010262966411193015, guid: 24508ca7452ef43368d6e76eb1b57500, type: 3}
 --- !u!54 &5850306162869050258
 Rigidbody:
   m_ObjectHideFlags: 0

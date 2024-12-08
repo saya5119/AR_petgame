@@ -1,22 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.ARFoundation;
 
 public class Character : MonoBehaviour
 {
     private Animator animator;
     [SerializeField] private float walkingSpeed = 0.1f;
-    [SerializeField] private MeshFilter ground;
+    [SerializeField] private ARPlane arPlane; // AR Planeの参照を追加
+    private Mesh groundMesh;
     private Vector3 _destination = Vector3.zero;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        if (arPlane != null)
+        {
+            groundMesh = arPlane.GetComponent<MeshFilter>()?.mesh;
+        }
         SetNewDestination();
     }
 
     void Update()
     {
+        if (groundMesh == null) return;
         var distance = Vector3.Distance(transform.position, _destination);
 
         if (distance <= 1f)
@@ -33,14 +40,13 @@ public class Character : MonoBehaviour
 
     private void SetNewDestination()
     {
-        if (ground == null || ground.sharedMesh == null) return;
+        if (groundMesh == null) return;
 
-        var vertices = ground.sharedMesh.vertices;
+        var vertices = groundMesh.vertices;
         if (vertices.Length == 0) return;
 
         var randomVertex = vertices[Random.Range(0, vertices.Length)];
-        _destination = ground.transform.TransformPoint(randomVertex);
-        Debug.Log("destination" + _destination); // デバッグ用
+        _destination = arPlane.transform.TransformPoint(randomVertex);
     }
 
     private void MoveTowardsDestination(float distance)
