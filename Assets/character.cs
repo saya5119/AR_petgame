@@ -21,24 +21,26 @@ public class Character : MonoBehaviour
 
         if (distance <= 1f)
         {
+            animator.SetBool("walking", false);
             SetNewDestination();
-            return;
         }
-
-        MoveTowardsDestination(distance);
+        else
+        {
+            animator.SetBool("walking", true);
+            MoveTowardsDestination(distance);
+        }
     }
 
     private void SetNewDestination()
     {
-        if (ground == null) return;
+        if (ground == null || ground.sharedMesh == null) return;
 
         var vertices = ground.sharedMesh.vertices;
         if (vertices.Length == 0) return;
 
         var randomVertex = vertices[Random.Range(0, vertices.Length)];
         _destination = ground.transform.TransformPoint(randomVertex);
-
-        animator.SetBool("walking", true);
+        Debug.Log("destination" + _destination); // デバッグ用
     }
 
     private void MoveTowardsDestination(float distance)
