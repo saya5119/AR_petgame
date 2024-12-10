@@ -7,23 +7,19 @@ public class Character : MonoBehaviour
 {
     private Animator animator;
     [SerializeField] private float walkingSpeed = 0.1f;
-    [SerializeField] private ARPlane arPlane; // AR Planeの参照を追加
-    private Mesh groundMesh;
-    private Vector3 _destination = Vector3.zero;
+    private ARPlaneManager arPlaneManager;
+    private Vector3 _destination;
+    private ARPlane arPlane;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        if (arPlane != null)
-        {
-            groundMesh = arPlane.GetComponent<MeshFilter>()?.mesh;
-        }
+        arPlaneManager = FindObjectOfType<ARPlaneManager>();
         SetNewDestination();
     }
 
     void Update()
     {
-        if (groundMesh == null) return;
         var distance = Vector3.Distance(transform.position, _destination);
 
         if (distance <= 1f)
@@ -40,13 +36,23 @@ public class Character : MonoBehaviour
 
     private void SetNewDestination()
     {
-        if (groundMesh == null) return;
+        foreach (var plane in arPlaneManager.trackables)
+        {
+            if (plane.boundary.Length > 0)
+            {
+                arPlane = plane; // 平面を選択
+                break; // 最初に見つかった平面を使用
+            }
+        }
+        
+        if (arPlane == null || arPlane.boundary == null || arPlane.boundary.Length == 0) return;
 
-        var vertices = groundMesh.vertices;
-        if (vertices.Length == 0) return;
+        // 平面のboundaryからランダムな頂点を選択
+        var boundary = arPlane.boundary;
+        var randomIndex = Random.Range(0, boundary.Length);
+        var randomPoint = boundary[randomIndex];
 
-        var randomVertex = vertices[Random.Range(0, vertices.Length)];
-        _destination = arPlane.transform.TransformPoint(randomVertex);
+        _destination = arPlane.transform.TransformPoint(randomPoint);
     }
 
     private void MoveTowardsDestination(float distance)
@@ -57,10 +63,8 @@ public class Character : MonoBehaviour
         Vector3 lookAtTarget = new Vector3(_destination.x, transform.position.y, _destination.z);
         Vector3 direction = lookAtTarget - transform.position;
 
-        if (direction != Vector3.zero)
-        {
-            Quaternion lookRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
-            transform.rotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
-        }
+        Quaternion lookRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
+        transform.rotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
     }
 }
+
