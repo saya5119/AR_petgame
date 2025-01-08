@@ -7,6 +7,7 @@ public class Character : MonoBehaviour
 {
     private Animator animator;
     [SerializeField] private float walkingSpeed = 0.1f;
+    [SerializeField] private float runningSpeed = 0.2f;
     private ARPlaneManager arPlaneManager;
     private Vector3 _destination;
     private ARPlane arPlane;
@@ -19,9 +20,8 @@ public class Character : MonoBehaviour
     private SkinnedMeshRenderer eyeRenderer;
     private float m_weight = 0.0f;
     public float starttime = 0f;
-    private bool changeface = false;
     private bool finishtouch = false;
-    private bool touch = false;
+    private bool tocameramove = false;
 
     void Start()
     {
@@ -37,21 +37,34 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        if(changeface && Time.time - starttime > 5.0f){
-            m_weight = 0f;
-            bodyRenderer.SetBlendShapeWeight(3, m_weight);
-            eyeRenderer.SetBlendShapeWeight(1, m_weight);
-            m_weight = 100.0f;
-            eyeRenderer.SetBlendShapeWeight(0, m_weight);
-            starttime = Time.time;
-            changeface = false;
-            finishtouch = true;
-        }
-        if(finishtouch && Time.time - starttime >2.0f){
+        if(finishtouch && Time.time - starttime >2.5f){
             m_weight = 0f;
             eyeRenderer.SetBlendShapeWeight(0, m_weight);
             stop = false;
-            touch = false;
+            SetNewDestination();
+        }
+        if(tocameramove){
+            if (arcamera == null) return;
+            // カメラの方向を向く（高さを固定）
+            Vector3 directionToCamera = arcamera.transform.position - transform.position;
+            directionToCamera.y = 0; // 高さの方向を無視する
+
+            float targetYRotation = Quaternion.LookRotation(directionToCamera.normalized).eulerAngles.y;
+            transform.rotation = Quaternion.Euler(0, targetYRotation, 0);
+
+            // カメラに向かって移動する
+            transform.position += directionToCamera.normalized * runningSpeed * Time.deltaTime;
+
+            // カメラに十分近づいたら停止する
+            if (directionToCamera.magnitude < 1f)
+            {
+                starttime = Time.time;
+                if(Time.time - starttime > 10f){
+                    tocameramove = false;
+                    stop = false;
+                    SetNewDestination();
+                }
+            }
         }
         if(stop) return;
         var distance = Vector3.Distance(transform.position, _destination);
@@ -115,23 +128,31 @@ public class Character : MonoBehaviour
     }
     void OnTriggerEnter(Collider collision)
     {
-        if(touch == false){
-            stop = true;
-            touch = true;
-            animator.SetBool("walking", false);
-            if (arcamera == null) return;
-            // カメラの方向を向く（高さを固定）
-            Vector3 directionToCamera = arcamera.transform.position - transform.position;
-            directionToCamera.y = 0; // 高さの方向を無視する
+        stop = true;
+        animator.SetBool("walking", false);
+        if (arcamera == null) return;
+        // カメラの方向を向く（高さを固定）
+        Vector3 directionToCamera = arcamera.transform.position - transform.position;
+        directionToCamera.y = 0; // 高さの方向を無視する
 
-            float targetYRotation = Quaternion.LookRotation(directionToCamera.normalized).eulerAngles.y;
-            transform.rotation = Quaternion.Euler(0, targetYRotation, 0);
-            m_weight = 100.0f;
-            //数字はブレンドシェイプの数(0スタート)
-            bodyRenderer.SetBlendShapeWeight(3, m_weight);
-            eyeRenderer.SetBlendShapeWeight(1, m_weight);
-            starttime = Time.time;
-            changeface = true;
-        }
+        float targetYRotation = Quaternion.LookRotation(directionToCamera.normalized).eulerAngles.y;
+        transform.rotation = Quaternion.Euler(0, targetYRotation, 0);
+        m_weight = 100.0f;
+        //数字はブレンドシェイプの数(0スタート)
+        bodyRenderer.SetBlendShapeWeight(3, m_weight);
+        eyeRenderer.SetBlendShapeWeight(1, m_weight);
+    }
+    void OnTriggerExit(Collider collision){
+        m_weight = 0f;
+        bodyRenderer.SetBlendShapeWeight(3, m_weight);
+        eyeRenderer.SetBlendShapeWeight(1, m_weight);
+        m_weight = 100.0f;
+        eyeRenderer.SetBlendShapeWeight(0, m_weight);
+        starttime = Time.time;
+        finishtouch = true;
+    }
+    public void Callbutton(){
+        stop = true;
+        tocameramove = true;
     }
 }
