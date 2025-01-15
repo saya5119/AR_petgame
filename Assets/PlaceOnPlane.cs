@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
  
 [RequireComponent(typeof(ARRaycastManager))]
@@ -19,6 +20,10 @@ private GameObject _spawnObject;
   void Update() {
     // 画面タップされた場合
     if (Input.GetMouseButtonDown(0)) {
+       if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) {
+        // nGUI上をクリックしているので処理をキャンセルする。
+        return;
+      }
       if (_raycastManager.Raycast(Input.GetTouch(0).position, _hitResults)) {
         // タップされた場所にオブジェクトを生成
         Instantiate(_spawnObject, _hitResults[0].pose.position, Quaternion.identity);

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
@@ -21,7 +22,8 @@ public class Character : MonoBehaviour
     private float m_weight = 0.0f;
     public float starttime = 0f;
     private bool finishtouch = false;
-    private bool tocameramove = false;
+    public bool tocameramove = false;
+    private bool timestop = false;
 
     void Start()
     {
@@ -44,6 +46,7 @@ public class Character : MonoBehaviour
             SetNewDestination();
         }
         if(tocameramove){
+            stop = true;
             if (arcamera == null) return;
             // カメラの方向を向く（高さを固定）
             Vector3 directionToCamera = arcamera.transform.position - transform.position;
@@ -51,19 +54,23 @@ public class Character : MonoBehaviour
 
             float targetYRotation = Quaternion.LookRotation(directionToCamera.normalized).eulerAngles.y;
             transform.rotation = Quaternion.Euler(0, targetYRotation, 0);
-
-            // カメラに向かって移動する
-            transform.position += directionToCamera.normalized * runningSpeed * Time.deltaTime;
-
             // カメラに十分近づいたら停止する
-            if (directionToCamera.magnitude < 1f)
+            if (directionToCamera.magnitude < 0.15f)
             {
-                starttime = Time.time;
-                if(Time.time - starttime > 10f){
-                    tocameramove = false;
-                    stop = false;
-                    SetNewDestination();
+                if(!timestop){
+                    starttime = Time.time;
+                    timestop = true;
                 }
+            }else{
+                // カメラに向かって移動する
+                transform.position += directionToCamera.normalized * runningSpeed * Time.deltaTime;
+            }
+            if(Time.time - starttime > 10f){
+                starttime = Time.time;
+                tocameramove = false;
+                stop = false;
+                timestop = false;
+                SetNewDestination();
             }
         }
         if(stop) return;
@@ -150,9 +157,5 @@ public class Character : MonoBehaviour
         eyeRenderer.SetBlendShapeWeight(0, m_weight);
         starttime = Time.time;
         finishtouch = true;
-    }
-    public void Callbutton(){
-        stop = true;
-        tocameramove = true;
     }
 }
