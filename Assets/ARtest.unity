@@ -497,8 +497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93729238bf42448ec9e93e0e8d0bdd9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jointPrefab: {fileID: 8421661500870949338, guid: 2505b894224354a03af410777cb6adee, type: 3}
-  _handParent: {fileID: 2899899895271302352, guid: 2505b894224354a03af410777cb6adee, type: 3}
+  _jointPrefab: {fileID: 5239467732016658172, guid: 1f86bb32ffb6a4cb09f940c41374bddc, type: 3}
+  _handParent: {fileID: 4899217693196495942, guid: 1f86bb32ffb6a4cb09f940c41374bddc, type: 3}
   _cameraTransfar: {fileID: 802706946}
   _resources: {fileID: 11400000, guid: 91bfddd4f6a664d13be4b4a5340a2099, type: 2}
   _useAsyncReadback: 1
@@ -783,7 +783,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1708742323}
-  pressColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1915134326
 GameObject:
   m_ObjectHideFlags: 0
