@@ -6,9 +6,28 @@ namespace MediaPipe.HandPose {
 
 public sealed class HandAnimator : MonoBehaviour
 {
-        [SerializeField] private GameObject _jointPrefab;
+        [SerializeField] public GameObject _jointPrefab;
 
-        [SerializeField] private Transform _handParent;
+        [SerializeField] public Transform _handParent;
+        [SerializeField] public GameObject _spherejointPrefab;
+
+        [SerializeField] public Transform _spherehandParent;
+        [SerializeField] public GameObject _icejointPrefab;
+
+        [SerializeField] public Transform _icehandParent;
+
+        [SerializeField] public GameObject _chocolatejointPrefab;
+
+        [SerializeField] public Transform _chocolatehandParent;
+        [SerializeField] public GameObject _strewberryjointPrefab;
+
+        [SerializeField] public Transform _strewberryhandParent;
+        [SerializeField] public GameObject _cookiejointPrefab;
+
+        [SerializeField] public Transform _cookiehandParent;
+        [SerializeField] public GameObject _candyjointPrefab;
+
+        [SerializeField] public Transform _candyhandParent;
 
         [SerializeField] CameraImageController _cameraTransfar = null;
 
@@ -17,12 +36,15 @@ public sealed class HandAnimator : MonoBehaviour
 
         private HandPipeline _pipeline;
 
+        public int handitem = 0;
+
         private Dictionary<HandPipeline.KeyPoint, GameObject> _handJoints =
             new Dictionary<HandPipeline.KeyPoint, GameObject>();
 
         void Start()
         {
             _pipeline = new HandPipeline(_resources);
+            updateHandConfiguration();
             initalizeHandJoint();
         }
 
@@ -56,6 +78,51 @@ public sealed class HandAnimator : MonoBehaviour
         }
 
         /// <summary>
+        /// 手の構成を更新
+        /// </summary>
+        private void updateHandConfiguration()
+        {
+            switch (handitem)
+            {
+                case 0:
+                    _jointPrefab = _spherejointPrefab;
+                    _handParent = _spherehandParent;
+                    break;
+                case 1:
+                    _jointPrefab = _icejointPrefab;
+                    _handParent = _icehandParent;
+                    break;
+                case 2:
+                    _jointPrefab = _chocolatejointPrefab;
+                    _handParent = _chocolatehandParent;
+                    break;
+                case 3:
+                    _jointPrefab = _strewberryjointPrefab;
+                    _handParent = _strewberryhandParent;
+                    break;
+                case 4:
+                    _jointPrefab = _cookiejointPrefab;
+                    _handParent = _cookiehandParent;
+                    break;
+                case 5:
+                    _jointPrefab = _candyjointPrefab;
+                    _handParent = _candyhandParent;
+                    break;
+                default:
+                    Debug.LogWarning("Invalid handitem value.");
+                    break;
+            }
+
+            // 現在の手のパーツを再初期化
+            foreach (var joint in _handJoints.Values)
+            {
+                Destroy(joint);
+            }
+            _handJoints.Clear();
+            initalizeHandJoint();
+        }
+
+        /// <summary>
         /// 手の座標更新
         /// </summary>
         private void updateHandPose()
@@ -79,6 +146,15 @@ public sealed class HandAnimator : MonoBehaviour
                 float max = 0.5f;
                 float cValue = Mathf.Clamp(value, min, max);
                 return (cValue - min) / (max - min);
+            }
+        }
+        // 外部から handitem を変更し構成を更新する
+        public void SetHandItem(int newHandItem)
+        {
+            if (handitem != newHandItem)
+            {
+                handitem = newHandItem;
+                updateHandConfiguration();
             }
         }
     }
