@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: strewberry
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f52d37f1c4ca1410481e49525249c2b8, type: 3}
+      propertyPath: m_TagString
+      value: strewberry
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -26,7 +26,7 @@ public class Character : MonoBehaviour
     private bool finishtouch = false;
     public bool tocameramove = false;
     private bool timestop = false;
-    [SerializeField] Material[] materialArray = new Material[2];
+    [SerializeField] Material[] materialArray = new Material[4];
 
     void Start()
     {
@@ -153,10 +153,24 @@ public class Character : MonoBehaviour
         //数字はブレンドシェイプの数(0スタート)
         bodyRenderer.SetBlendShapeWeight(3, m_weight);
         eyeRenderer.SetBlendShapeWeight(1, m_weight);
-        //マテリアル変更
-        bodyRenderer.material = materialArray[1];
-        eyeRenderer.material = materialArray[1];
-        acsRenderer.material = materialArray[1];
+        if(collision.gameObject.tag == "candy"){
+            //マテリアル変更
+            bodyRenderer.material = materialArray[0];
+            eyeRenderer.material = materialArray[0];
+            acsRenderer.material = materialArray[0];
+        }else if(collision.gameObject.tag == "choco"){
+            bodyRenderer.material = materialArray[1];
+            eyeRenderer.material = materialArray[1];
+            acsRenderer.material = materialArray[1];
+        }else if(collision.gameObject.tag == "strewberry"){
+            bodyRenderer.material = materialArray[2];
+            eyeRenderer.material = materialArray[2];
+            acsRenderer.material = materialArray[2];
+        }else if(collision.gameObject.tag == "cookie"){
+            bodyRenderer.material = materialArray[3];
+            eyeRenderer.material = materialArray[3];
+            acsRenderer.material = materialArray[3];
+        }
     }
     void OnTriggerExit(Collider collision){
         m_weight = 0f;

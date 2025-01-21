@@ -6,6 +6,11 @@ TagManager:
   tags:
   - character
   - ' food'
+  - candy
+  - choco
+  - cookie
+  - strewberry
+  - ice
   layers:
   - Default
   - TransparentFX

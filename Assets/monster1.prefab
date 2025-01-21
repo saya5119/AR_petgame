@@ -142,6 +142,8 @@ MonoBehaviour:
   materialArray:
   - {fileID: 2100000, guid: b0444c6b60a194fb4bdc36f68203853c, type: 2}
   - {fileID: 2100000, guid: 05c52929fcdf6420096b3c752bf7ca4b, type: 2}
+  - {fileID: 2100000, guid: efe9cf9e2f35840799f07d91930a638f, type: 2}
+  - {fileID: 2100000, guid: 8608b75401d424a3eac22121a7caf6ed, type: 2}
 --- !u!54 &2220251268629149626
 Rigidbody:
   m_ObjectHideFlags: 0
