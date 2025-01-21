@@ -28,8 +28,12 @@ public class Character : MonoBehaviour
     private bool timestop = false;
     [SerializeField] Material[] materialArray = new Material[4];
     public GameObject happyeffect;
+    public GameObject changeeffect;
     private GameObject effect;
     private bool effectstop = false;
+    private bool eating = false;
+    public float speed = 1f; // パクパクの速度
+    private float timer = 0f;
 
     void Start()
     {
@@ -61,6 +65,36 @@ public class Character : MonoBehaviour
             finishtouch = false;
             effectstop = false;
             SetNewDestination();
+        }
+        if(eating){
+            // タイマーを進める
+            timer += Time.deltaTime * speed;
+
+            // 1.5往復（3秒）の間だけ動く
+            if (timer <= 3.0f)
+            {
+                // 0から100を往復するように設定
+                m_weight = Mathf.PingPong(timer, 100f);
+
+                // blend shape を更新
+                bodyRenderer.SetBlendShapeWeight(2, m_weight);
+            }else if(timer > 3.0f && timer <= 5.0f){
+                m_weight = 0f;
+                bodyRenderer.SetBlendShapeWeight(2, m_weight);
+                bodyRenderer.SetBlendShapeWeight(1, m_weight);
+                Vector3 newPosition = new Vector3(transform.position.x, transform.position.y + 0.06f, transform.position.z + 0.02f);
+                // エフェクトを生成
+                effect = Instantiate(changeeffect, newPosition, Quaternion.identity);
+                //カウントを入れる
+                bodyRenderer.material = materialArray[0];
+                eyeRenderer.material = materialArray[0];
+                acsRenderer.material = materialArray[0];
+            }else{
+                eating = false;
+                timer = 0f;
+                Destroy(effect);
+                SetNewDestination();
+            }
         }
         if(tocameramove){
             stop = true;
@@ -182,6 +216,10 @@ public class Character : MonoBehaviour
             bodyRenderer.material = materialArray[3];
             eyeRenderer.material = materialArray[3];
             acsRenderer.material = materialArray[3];
+        }else if(collision.gameObject.tag == "ice" && !eating){
+            //数字はブレンドシェイプの数(0スタート)
+            bodyRenderer.SetBlendShapeWeight(1, m_weight);
+            eating = true;
         }
     }
     void OnTriggerExit(Collider collision){
