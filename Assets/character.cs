@@ -27,6 +27,9 @@ public class Character : MonoBehaviour
     public bool tocameramove = false;
     private bool timestop = false;
     [SerializeField] Material[] materialArray = new Material[4];
+    public GameObject happyeffect;
+    private GameObject effect;
+    private bool effectstop = false;
 
     void Start()
     {
@@ -44,10 +47,19 @@ public class Character : MonoBehaviour
 
     void Update()
     {
+        if(finishtouch && Time.time - starttime > 0.6f && !effectstop){
+            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y + 0.06f, transform.position.z + 0.02f);
+            // エフェクトを生成
+            effect = Instantiate(happyeffect, newPosition, Quaternion.identity);
+            effectstop = true;
+        }
         if(finishtouch && Time.time - starttime >2.5f){
+            Destroy(effect);
             m_weight = 0f;
             eyeRenderer.SetBlendShapeWeight(0, m_weight);
             stop = false;
+            finishtouch = false;
+            effectstop = false;
             SetNewDestination();
         }
         if(tocameramove){
