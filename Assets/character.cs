@@ -19,11 +19,14 @@ public class Character : MonoBehaviour
     private SkinnedMeshRenderer bodyRenderer;
     private GameObject eye;
     private SkinnedMeshRenderer eyeRenderer;
+    private GameObject acs;
+    private SkinnedMeshRenderer acsRenderer;
     private float m_weight = 0.0f;
     public float starttime = 0f;
     private bool finishtouch = false;
     public bool tocameramove = false;
     private bool timestop = false;
+    [SerializeField] Material[] materialArray = new Material[2];
 
     void Start()
     {
@@ -34,6 +37,8 @@ public class Character : MonoBehaviour
         bodyRenderer = body.GetComponent<SkinnedMeshRenderer>();
         eye = transform.Find("eye").gameObject;
         eyeRenderer = eye.GetComponent<SkinnedMeshRenderer>();
+        acs = transform.Find("acs").gameObject;
+        acsRenderer = acs.GetComponent<SkinnedMeshRenderer>();
         SetNewDestination();
     }
 
@@ -148,6 +153,10 @@ public class Character : MonoBehaviour
         //数字はブレンドシェイプの数(0スタート)
         bodyRenderer.SetBlendShapeWeight(3, m_weight);
         eyeRenderer.SetBlendShapeWeight(1, m_weight);
+        //マテリアル変更
+        bodyRenderer.material = materialArray[1];
+        eyeRenderer.material = materialArray[1];
+        acsRenderer.material = materialArray[1];
     }
     void OnTriggerExit(Collider collision){
         m_weight = 0f;

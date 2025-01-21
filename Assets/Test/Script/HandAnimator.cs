@@ -133,7 +133,12 @@ public sealed class HandAnimator : MonoBehaviour
             //ワールド座標に変換する
                 float xPos = Screen.width * normalize((position.x + position2.x) / 2.0f);
                 float yPos = Screen.height * normalize((position.y + position2.y) / 2.0f);
-                float zPos = 0.5f + (position.z + position2.z) / 2.0f;
+                float zPos = 0;
+                if(handitem == 0){
+                    zPos = 0.5f + (position.z + position2.z) / 2.0f;
+                }else{
+                    zPos = 0.4f + (position.z + position2.z) / 2.0f;
+                }
                 Vector3 cameraPos = new Vector3(xPos, yPos, zPos);
                 var screenPosition = Camera.main.ScreenToWorldPoint(cameraPos);
                 //それぞれの手のパーツに座標を代入

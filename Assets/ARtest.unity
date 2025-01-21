@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 71954698}
   - component: {fileID: 71954697}
   - component: {fileID: 71954696}
+  - component: {fileID: 71954699}
   m_Layer: 5
   m_Name: cookie
   m_TagString: Untagged
@@ -487,7 +488,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 71954697}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 71954699}
+        m_TargetAssemblyTypeName: cookie, Assembly-CSharp
+        m_MethodName: Cookiebutton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &71954697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,6 +539,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 71954694}
   m_CullTransparentMesh: 1
+--- !u!114 &71954699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71954694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a2a7290b0a304b14b939bbe62977ff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cookiebutton: {fileID: 71954696}
+  hand4: {fileID: 802706944}
 --- !u!1 &146988718
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +633,7 @@ GameObject:
   - component: {fileID: 244039370}
   - component: {fileID: 244039369}
   - component: {fileID: 244039368}
+  - component: {fileID: 244039371}
   m_Layer: 5
   m_Name: chocolate
   m_TagString: Untagged
@@ -676,7 +704,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 244039369}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 244039371}
+        m_TargetAssemblyTypeName: chocolate, Assembly-CSharp
+        m_MethodName: Chocolatebutton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &244039369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,6 +755,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 244039366}
   m_CullTransparentMesh: 1
+--- !u!114 &244039371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244039366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a8afb5ab25f47dd946c78baf7a40e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chocolatebutton: {fileID: 244039368}
+  hand2: {fileID: 802706944}
 --- !u!1 &399475270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,7 +1055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64f6d932bdb0742888af167472c697f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnObject: {fileID: 7405644168143729284, guid: d5f79c2fe712e4caca2811f7c4ab9fb4, type: 3}
+  _spawnObject: {fileID: 3020036237557881613, guid: d5f79c2fe712e4caca2811f7c4ab9fb4, type: 3}
 --- !u!1 &529245206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,6 +1068,7 @@ GameObject:
   - component: {fileID: 529245210}
   - component: {fileID: 529245209}
   - component: {fileID: 529245208}
+  - component: {fileID: 529245211}
   m_Layer: 5
   m_Name: candy
   m_TagString: Untagged
@@ -1084,7 +1139,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 529245209}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 529245211}
+        m_TargetAssemblyTypeName: candy, Assembly-CSharp
+        m_MethodName: Candybutton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &529245209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1123,6 +1190,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529245206}
   m_CullTransparentMesh: 1
+--- !u!114 &529245211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529245206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69158518d17de42fb9e2b312ba9db72d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  candybutton: {fileID: 529245208}
+  hand5: {fileID: 802706944}
 --- !u!1 &634960995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,6 +1655,7 @@ GameObject:
   - component: {fileID: 1110406568}
   - component: {fileID: 1110406567}
   - component: {fileID: 1110406566}
+  - component: {fileID: 1110406569}
   m_Layer: 5
   m_Name: strewberry
   m_TagString: Untagged
@@ -1644,7 +1726,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1110406567}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1110406569}
+        m_TargetAssemblyTypeName: strewberry, Assembly-CSharp
+        m_MethodName: Strewberrybutton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1110406567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1683,6 +1777,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110406564}
   m_CullTransparentMesh: 1
+--- !u!114 &1110406569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110406564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d284180a14b284cc0b754b51bc090616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strewberrybutton: {fileID: 1110406566}
+  hand3: {fileID: 802706944}
 --- !u!1 &1133108860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1989,9 +2097,9 @@ RectTransform:
   - {fileID: 529245207}
   m_Father: {fileID: 1133108864}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 176.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1184, y: 176}
   m_SizeDelta: {x: 1024.8772, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1231674572
@@ -2205,7 +2313,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 400, y: 76}
-  m_SizeDelta: {x: 250, y: 250}
+  m_SizeDelta: {x: 225, y: 225}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1708742323
 MonoBehaviour:

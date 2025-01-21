@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7640158802912432085
+--- !u!1001 &2677455008177120860
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5667088
+      value: 1260.5702
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.020381063
+      value: -95.1526
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -48,6 +48,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6986940108012370676, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6986940108012370676, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 05c52929fcdf6420096b3c752bf7ca4b, type: 2}
+    - target: {fileID: -1206874426333947015, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1206874426333947015, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 05c52929fcdf6420096b3c752bf7ca4b, type: 2}
     - target: {fileID: 919132149155446097, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
       propertyPath: m_Name
       value: monster1
@@ -56,36 +72,44 @@ PrefabInstance:
       propertyPath: m_TagString
       value: character
       objectReference: {fileID: 0}
+    - target: {fileID: 3807195052837979625, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3807195052837979625, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 05c52929fcdf6420096b3c752bf7ca4b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2031132888208226744}
+      addedObject: {fileID: 2037324158677533965}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2806437009535060887}
+      addedObject: {fileID: 1649690874740320568}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5850306162869050258}
+      addedObject: {fileID: 2220251268629149626}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5507082008865729409}
+      addedObject: {fileID: 4872266974537905629}
   m_SourcePrefab: {fileID: 100100000, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
---- !u!1 &7405644168143729284 stripped
+--- !u!1 &3020036237557881613 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d59065e8977a444b9919c9f5b2a7e9a6, type: 3}
-  m_PrefabInstance: {fileID: 7640158802912432085}
+  m_PrefabInstance: {fileID: 2677455008177120860}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &2031132888208226744
+--- !u!95 &2037324158677533965
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7405644168143729284}
+  m_GameObject: {fileID: 3020036237557881613}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a7a14a9062acb42148491fc206321a7b, type: 2}
@@ -99,27 +123,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2806437009535060887
+--- !u!114 &1649690874740320568
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7405644168143729284}
+  m_GameObject: {fileID: 3020036237557881613}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 836893437b82249de924e0be8b555529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 0.1
+  runningSpeed: 0.2
   starttime: 0
---- !u!54 &5850306162869050258
+  tocameramove: 0
+  materialArray:
+  - {fileID: 2100000, guid: b0444c6b60a194fb4bdc36f68203853c, type: 2}
+  - {fileID: 2100000, guid: 05c52929fcdf6420096b3c752bf7ca4b, type: 2}
+--- !u!54 &2220251268629149626
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7405644168143729284}
+  m_GameObject: {fileID: 3020036237557881613}
   serializedVersion: 4
   m_Mass: 5
   m_Drag: 0
@@ -140,13 +169,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!135 &5507082008865729409
+--- !u!135 &4872266974537905629
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7405644168143729284}
+  m_GameObject: {fileID: 3020036237557881613}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
