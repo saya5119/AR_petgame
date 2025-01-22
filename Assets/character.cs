@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.UI;
+using MediaPipe.HandPose;
 
 public class Character : MonoBehaviour
 {
@@ -30,11 +31,17 @@ public class Character : MonoBehaviour
     public GameObject happyeffect;
     public GameObject changeeffect;
     private GameObject effect;
+    private GameObject effect2;
+
     private bool effectstop = false;
     private bool eating = false;
     public float speed = 1f; // パクパクの速度
-    private float timer = 0f;
-
+    private int foodcount = 0;
+    private bool materialchange = false;
+    private HandAnimator HandAnimatorscript;
+    private GameObject hand6;
+    private GameObject food;
+    private bool iceeat = false;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -67,34 +74,46 @@ public class Character : MonoBehaviour
             SetNewDestination();
         }
         if(eating){
-            // タイマーを進める
-            timer += Time.deltaTime * speed;
-
             // 1.5往復（3秒）の間だけ動く
-            if (timer <= 3.0f)
+            if (Time.time - starttime <= 3.0f)
             {
                 // 0から100を往復するように設定
-                m_weight = Mathf.PingPong(timer, 100f);
+                m_weight = Mathf.PingPong((Time.time - starttime)*300, 100f);
 
                 // blend shape を更新
                 bodyRenderer.SetBlendShapeWeight(2, m_weight);
-            }else if(timer > 3.0f && timer <= 5.0f){
+            }else if(Time.time - starttime > 3.0f && Time.time - starttime <= 5.0f && !materialchange){
+                //検索
+                food = GameObject.Find("food");
+                hand6 = GameObject.Find("HandTrackingController");
+                HandAnimatorscript = hand6.GetComponent<HandAnimator>();
+                HandAnimatorscript.SetHandItem(0);
+                food.SetActive(false);
                 m_weight = 0f;
                 bodyRenderer.SetBlendShapeWeight(2, m_weight);
                 bodyRenderer.SetBlendShapeWeight(1, m_weight);
                 Vector3 newPosition = new Vector3(transform.position.x, transform.position.y + 0.06f, transform.position.z + 0.02f);
                 // エフェクトを生成
-                effect = Instantiate(changeeffect, newPosition, Quaternion.identity);
+                effect2 = Instantiate(changeeffect, newPosition, Quaternion.identity);
                 //カウントを入れる
-                bodyRenderer.material = materialArray[0];
-                eyeRenderer.material = materialArray[0];
-                acsRenderer.material = materialArray[0];
-            }else{
+                bodyRenderer.material = materialArray[foodcount];
+                eyeRenderer.material = materialArray[foodcount];
+                acsRenderer.material = materialArray[foodcount];
+                materialchange = true;
+            }else if(Time.time - starttime > 5.0f && Time.time - starttime <= 7.0f){
+                Destroy(effect2);
+            }else if(Time.time - starttime > 7.0f){
                 eating = false;
-                timer = 0f;
-                Destroy(effect);
+                stop = false;
+                materialchange = false;
                 SetNewDestination();
             }
+        }
+        if(iceeat){
+            // 0から100を往復するように設定
+                m_weight = Mathf.PingPong((Time.time - starttime)*300, 100f);
+                // blend shape を更新
+                bodyRenderer.SetBlendShapeWeight(2, m_weight);
         }
         if(tocameramove){
             stop = true;
@@ -196,33 +215,41 @@ public class Character : MonoBehaviour
         float targetYRotation = Quaternion.LookRotation(directionToCamera.normalized).eulerAngles.y;
         transform.rotation = Quaternion.Euler(0, targetYRotation, 0);
         m_weight = 100.0f;
-        //数字はブレンドシェイプの数(0スタート)
-        bodyRenderer.SetBlendShapeWeight(3, m_weight);
-        eyeRenderer.SetBlendShapeWeight(1, m_weight);
-        if(collision.gameObject.tag == "candy"){
-            //マテリアル変更
-            bodyRenderer.material = materialArray[0];
-            eyeRenderer.material = materialArray[0];
-            acsRenderer.material = materialArray[0];
-        }else if(collision.gameObject.tag == "choco"){
-            bodyRenderer.material = materialArray[1];
-            eyeRenderer.material = materialArray[1];
-            acsRenderer.material = materialArray[1];
-        }else if(collision.gameObject.tag == "strewberry"){
-            bodyRenderer.material = materialArray[2];
-            eyeRenderer.material = materialArray[2];
-            acsRenderer.material = materialArray[2];
-        }else if(collision.gameObject.tag == "cookie"){
-            bodyRenderer.material = materialArray[3];
-            eyeRenderer.material = materialArray[3];
-            acsRenderer.material = materialArray[3];
-        }else if(collision.gameObject.tag == "ice" && !eating){
-            //数字はブレンドシェイプの数(0スタート)
-            bodyRenderer.SetBlendShapeWeight(1, m_weight);
-            eating = true;
+        if(!eating){
+            if(collision.gameObject.tag == "candy"){
+                foodcount = 0;
+                bodyRenderer.SetBlendShapeWeight(1, m_weight);
+                starttime = Time.time;
+                eating = true;
+            }else if(collision.gameObject.tag == "choco"){
+                foodcount = 1;
+                bodyRenderer.SetBlendShapeWeight(1, m_weight);
+                starttime = Time.time;
+                eating = true;
+            }else if(collision.gameObject.tag == "strewberry"){
+                foodcount = 2;
+                bodyRenderer.SetBlendShapeWeight(1, m_weight);
+                starttime = Time.time;
+                eating = true;
+            }else if(collision.gameObject.tag == "cookie"){
+                foodcount = 3;
+                bodyRenderer.SetBlendShapeWeight(1, m_weight);
+                starttime = Time.time;
+                eating = true;
+            }else if(collision.gameObject.tag == "ice"){
+                //数字はブレンドシェイプの数(0スタート)
+                bodyRenderer.SetBlendShapeWeight(1, m_weight);
+                starttime = Time.time;
+                iceeat = true;
+            }else{
+                //数字はブレンドシェイプの数(0スタート)
+                bodyRenderer.SetBlendShapeWeight(3, m_weight);
+                eyeRenderer.SetBlendShapeWeight(1, m_weight);
+            }
         }
     }
     void OnTriggerExit(Collider collision){
+        if(!eating && !iceeat){
         m_weight = 0f;
         bodyRenderer.SetBlendShapeWeight(3, m_weight);
         eyeRenderer.SetBlendShapeWeight(1, m_weight);
@@ -230,5 +257,12 @@ public class Character : MonoBehaviour
         eyeRenderer.SetBlendShapeWeight(0, m_weight);
         starttime = Time.time;
         finishtouch = true;
+        }
+        if(iceeat){
+            m_weight = 0f;
+            bodyRenderer.SetBlendShapeWeight(1, m_weight);
+            bodyRenderer.SetBlendShapeWeight(2, m_weight);
+            iceeat = false;
+        }
     }
 }

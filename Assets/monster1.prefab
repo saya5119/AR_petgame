@@ -145,6 +145,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: efe9cf9e2f35840799f07d91930a638f, type: 2}
   - {fileID: 2100000, guid: 8608b75401d424a3eac22121a7caf6ed, type: 2}
   happyeffect: {fileID: 4109064841345302812, guid: 2a409ab125c5216449bc5f005ec045f0, type: 3}
+  changeeffect: {fileID: 6403252182692130976, guid: 4e12b3c53c0f8ee4da83655d8d2770d5, type: 3}
+  changecomeffect: {fileID: 4035903591278710484, guid: aa122f157eac1c8428ae5db8a315ccd8, type: 3}
+  speed: 1
 --- !u!54 &2220251268629149626
 Rigidbody:
   m_ObjectHideFlags: 0
