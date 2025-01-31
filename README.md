@@ -1,1 +1,11 @@
 <h1>ARペットゲーム</h1>
+<p>ARとHandTrackingを組み合わせたゲームです。</p>
+<p>HandTrackingはこちらからお借りしました。https://github.com/keijiro/HandPoseBarracuda</p>
+<h3>できること</h3>
+<ul>
+  <li>撫でる</li>
+  <p>手とキャラクターが触れると表情が変化し、喜びます。</p>
+  <p>https://github.com/user-attachments/assets/58fa2e4b-fcd5-4163-bb95-b640d09f4e6a</p>
+  <li>呼び寄せる</li>
+  <li>ご飯を食べる</li>
+</ul>
