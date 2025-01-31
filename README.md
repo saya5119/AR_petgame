@@ -11,11 +11,13 @@
   <p>https://github.com/user-attachments/assets/029b4223-9f85-44fc-b2d4-f23436501abd</p>
   <li>ご飯を食べる</li>
   <p>ご飯には2つのパターンがあり、食べるモーションのみのものと食べたものによって模様が変わるものがあります。</p>
-    <li>模様が変わらないもの</li>
-    <p>氷を食べた時はパクパクとしたモーションが続きます。</p>
-    <p>https://github.com/user-attachments/assets/ec593ae7-d14d-4dbb-a53c-c01c8e1f729e</p>
-    <li>模様が変わるもの</li>
-    <p>フレーバー(チョコレート、いちご、クッキー、ミルク飴)を食べた時は体がフレーバーに合わせた模様に変わります。</p>
-    <p>＊ミルク飴は模様をバニラに戻すためのものです。</p>
-    <p>https://github.com/user-attachments/assets/188f1745-574e-44f6-adbb-890aa1ceafbf</p>
+    <ul>
+      <li>模様が変わらないもの</li>
+      <p>氷を食べた時はパクパクとしたモーションが続きます。</p>
+      <p>https://github.com/user-attachments/assets/ec593ae7-d14d-4dbb-a53c-c01c8e1f729e</p>
+      <li>模様が変わるもの</li>
+      <p>フレーバー(チョコレート、いちご、クッキー、ミルク飴)を食べた時は体がフレーバーに合わせた模様に変わります。</p>
+      <p>＊ミルク飴は模様をバニラに戻すためのものです。</p>
+      <p>https://github.com/user-attachments/assets/188f1745-574e-44f6-adbb-890aa1ceafbf</p>
+    </ul>
 </ul>
